@@ -124,8 +124,3 @@ void loop()
 		strip.show();
 	}
 }
-// use this function to return a colour in a rainbow sort of pattern.
-// for the moment we will just return a single colour, but
-uint32_t colourWheel(int16_t count, int offset){
-	strip.
-}
