@@ -16,6 +16,7 @@ Pump up the Jam with this beat bar! Get a visual display that bounces in tune wi
 |1 | [ST0335](http://jaycar.com.au/p/ST0335) | Toggle switch
 |1 | [PH9235](http://jaycar.com.au/p/PH9235) | 9V battery module
 
+* Solid core cables such as [WH3032](https://jaycar.com.au/p/WH3032) are always handy to have close by, as some tasks are easier with solid core wire.
 
 ## Connection table
 
@@ -29,6 +30,11 @@ Pump up the Jam with this beat bar! Get a visual display that bounces in tune wi
 
 Also connect all of the VCC and 5V connections. The battery holder will connect to one side of the toggle switch, which will allow you to turn on/off the unit by feeding 9V into the `VIN` pin of the Nano.
 
+![](images/schematic.png)
+
+(note, image is just a representation of the modules to show how they connect.)
+
+Due to how limited each of the connections are, we're using absolutely every connection we can to connect with the socket-socket leads.
 Each of the LED strips will be connected end to end to each other, and will make a zig-zag pattern across the front of the case, as shown in the below diagram.
 
 ![](images/pixels.png)
@@ -36,6 +42,43 @@ Each of the LED strips will be connected end to end to each other, and will make
 It is important to ensure that each of the `DOUT` and `DIN` matches up, the DATA-OUT of one module must feed into the DATA-IN of the next module, and the DATA-IN of the first module, attaches to the Nano
 
 ## Assembly
+
+
+One of the first steps is to modify the Nano so that the cables are a little more organised.
+
+![](images/nano1.jpg)
+
+We do this by reversing the ICSP pins, following [this guide](https://www.jaycar.com.au/removing-headers) on how to remove them, then solder on the opposite side:
+
+![](images/nano2.jpg)
+
+This is so now all the cables come out of one side of the nano. Next we'll fit the microphone to the outside of the case: unsolder the microphone and put 2 small wires on the leads to extend it just enough to reach the case as shown, We used some hot glue to keep the microphone in place.
+
+![](images/miccable.jpg)
+
+From the front: the microphone will listen to the ambient sounds and feed it to the arduino. Note that the microhpone is about 9.5 mm across, so aim to drill out 9mm and file out the .5 with some [needle files](https://jaycar.com.au/p/TD2128).
+
+![](images/micmount.jpg)
+
+The battery mount is easy enough, as you want to just bend the leads and solder on some wires so that the wires can come out from under the battery holder is placed. You will find that the battery has feet around the corners that can give enough room for the cable to slide out from underneath.
+
+![](images/power.jpg)
+
+Drill a 6mm hole for the switch to mount to, and attach the positive of the battery to one of the outside switch legs, and attach a wire with one of the sockets onto the middle leg for the switch.
+
+With the top clear panel, place the LED strips where you want, taking note of their orientation; also place the screen where you want, and find a way for you to solder it all together.
+
+The LED strips come with 4 pin headers for each side. You will use atleast one of these to act as the starting connector from the start of your chain of LEDs.
+
+It might be worth while to get everything prepared, and keeping it in place with bluetack so that you can check the sizes and fit of everything. We left it to chance and had to trim our GND connection on the screen, so that we could fit the vertical connector near the battery. The grond connection can just go to the closest LED ground connection of course.
+
+![](images/screen.jpg)
+
+You can also solder wires onto the LED panels, making sure that you check for tolerances and how it fits around the case. We opted to use one of the 4 pin connectors but ultimately regretted it when it lifted the pad and caused catastrophic damage to the LED strip. We had to end up using a lot of hot glue to support the whole assembly, which can look ugly when you're looking at it in daylight, (hopefully people only look at it at night.)
+
+![](images/all.jpg)
+
+When all is said and done, connect up how the schematic shows and connect it to the computer for programming.
 
 ## Source code
 The code in this project uses a library called "FHT" which has been included in with these sketch files. This file was originally created by [Open Music Labs](http://wiki.openmusiclabs.com/wiki/ArduinoFHT).
@@ -66,9 +109,10 @@ for (int i = 0 ; i < FHT_N ; i++)
 	fht_input[i] = k; // fill out array
 }
 ```
-We take the data out of the analog digital converter for this particular moment in time, as you can see it is a very slim slice of time so we must do this quickly, and sample a short audio segment. into the `fht_input` array
+We take the data out of the analog digital converter for this particular moment in time, as you can see it is a very slim slice of time so we must do this quickly, and sample a short audio segment into the `fht_input` array. We use raw bit-banging to do this, by controlling the registers manually as they say in the [ATMEL DATASHEET](http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf)
 
-The library also recommends doing the following, so we'll do them aswel:
+The library also recommends doing the following, so we'll do them as well:
+
 ```c
 fht_window();	// window the data for better frequency response
 fht_reorder();	// reorder the data before doing the fht
