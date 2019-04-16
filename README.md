@@ -2,6 +2,7 @@
 
 Pump up the Jam with this beat bar! Get a visual display that bounces in tune with the music. Uses an 8-bit-friendly Fast Fourier Transform library to detect different frequencies and pulses the bars for base, midranges, and treble. Contained in a tidy little box so you can take it and hang it up at your next party.
 
+![](beatbar.gif)
 
 ## Bill of Materials
 
@@ -138,7 +139,7 @@ for(int i = 2; i < FHT_N/2; i++){
 
 We then grab 4 different frequencies to correspond to how high we display on the LED bar graph, and set the bar graph accordingly.
 
-Notice how, because the LED bar graph essentially zig-zags around the front panel, we flip the 2nd and 4th pixel orders, going from `(i%8)` to `7-(i%8)` so that all the columns appear to be
+Notice how, because the LED bar graph essentially zig-zags around the front panel, we flip the 2nd and 4th pixel orders, going from `(i%8)` to `7-(i%8)` so that all the columns appear to be oriented the same way.
 
 ## Programming
 
