@@ -1,4 +1,4 @@
-# Music-Beat-Bar
+# Music Beat Bar
 
 Pump up the Jam with this beat bar! Get a visual display that bounces in tune with the music. Uses an 8-bit-friendly Fast Fourier Transform library to detect different frequencies and pulses the bars for base, midranges, and treble. Contained in a tidy little box so you can take it and hang it up at your next party.
 
@@ -8,14 +8,14 @@ Pump up the Jam with this beat bar! Get a visual display that bounces in tune wi
 
 |Qty| Code | Description |
 |---|---|---|
-|1 | [XC4414](http://jaycar.com.au/p/XC4414) | Arduino Nano
-|1 | [XC4384](http://jaycar.com.au/p/XC4384) | Monochrome OLED screen
-|1 | [HB6082](http://jaycar.com.au/p/HB6082) | Black enclosure
-|4 | [XC4380](http://jaycar.com.au/p/XC4380) | RGB Strip module
-|1 | [XC4438](http://jaycar.com.au/p/XC4438) | Microphone sound sensor module
-|1 | [WC6026](http://jaycar.com.au/p/WC6026) | Socket socket jumper leads
-|1 | [ST0335](http://jaycar.com.au/p/ST0335) | Toggle switch
-|1 | [PH9235](http://jaycar.com.au/p/PH9235) | 9V battery module
+|1 | [XC4414](https://jaycar.com.au/p/XC4414) | Arduino Nano
+|1 | [XC4384](https://jaycar.com.au/p/XC4384) | Monochrome OLED screen
+|1 | [HB6082](https://jaycar.com.au/p/HB6082) | Black enclosure
+|4 | [XC4380](https://jaycar.com.au/p/XC4380) | RGB Strip module
+|1 | [XC4438](https://jaycar.com.au/p/XC4438) | Microphone sound sensor module
+|1 | [WC6026](https://jaycar.com.au/p/WC6026) | Socket socket jumper leads
+|1 | [ST0335](https://jaycar.com.au/p/ST0335) | Toggle switch
+|1 | [PH9235](https://jaycar.com.au/p/PH9235) | 9V battery module
 
 * Solid core cables such as [WH3032](https://jaycar.com.au/p/WH3032) are always handy to have close by, as some tasks are easier with solid core wire.
 
@@ -49,7 +49,7 @@ One of the first steps is to modify the Nano so that the cables are a little mor
 
 ![](images/nano1.jpg)
 
-We do this by reversing the ICSP pins, following [this guide](https://www.jaycar.com.au/removing-headers) on how to remove them, then solder on the opposite side:
+We do this by reversing the ICSP pins, following [this guide](https://jaycar.com.au/removing-headers) on how to remove them, then solder on the opposite side:
 
 ![](images/nano2.jpg)
 
