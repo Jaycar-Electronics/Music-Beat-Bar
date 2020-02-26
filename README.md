@@ -1,49 +1,58 @@
 # Music Beat Bar
 
+![beats](images/beatbar.gif)
+
 Pump up the Jam with this beat bar! Get a visual display that bounces in tune with the music. Uses an 8-bit-friendly Fast Fourier Transform library to detect different frequencies and pulses the bars for base, midranges, and treble. Contained in a tidy little box so you can take it and hang it up at your next party.
 
-![](beatbar.gif)
+![hero](images/hero.jpg)
+
+- [Music Beat Bar](#Music-Beat-Bar)
+  - [Bill of Materials](#Bill-of-Materials)
+  - [Connection table](#Connection-table)
+  - [Assembly](#Assembly)
+  - [Source code](#Source-code)
+  - [Programming](#Programming)
+  - [Use](#Use)
 
 ## Bill of Materials
 
-|Qty| Code | Description |
-|---|---|---|
-|1 | [XC4414](https://jaycar.com.au/p/XC4414) | Arduino Nano
-|1 | [XC4384](https://jaycar.com.au/p/XC4384) | Monochrome OLED screen
-|1 | [HB6082](https://jaycar.com.au/p/HB6082) | Black enclosure
-|4 | [XC4380](https://jaycar.com.au/p/XC4380) | RGB Strip module
-|1 | [XC4438](https://jaycar.com.au/p/XC4438) | Microphone sound sensor module
-|1 | [WC6026](https://jaycar.com.au/p/WC6026) | Socket socket jumper leads
-|1 | [ST0335](https://jaycar.com.au/p/ST0335) | Toggle switch
-|1 | [PH9235](https://jaycar.com.au/p/PH9235) | 9V battery module
+| Qty | Code                                     | Description                    |
+| --- | ---------------------------------------- | ------------------------------ |
+| 1   | [XC4414](https://jaycar.com.au/p/XC4414) | Arduino Nano                   |
+| 1   | [XC4384](https://jaycar.com.au/p/XC4384) | Monochrome OLED screen         |
+| 1   | [HB6082](https://jaycar.com.au/p/HB6082) | Black enclosure                |
+| 4   | [XC4380](https://jaycar.com.au/p/XC4380) | RGB Strip module               |
+| 1   | [XC4438](https://jaycar.com.au/p/XC4438) | Microphone sound sensor module |
+| 1   | [WC6026](https://jaycar.com.au/p/WC6026) | Socket socket jumper leads     |
+| 1   | [ST0335](https://jaycar.com.au/p/ST0335) | Toggle switch                  |
+| 1   | [PH9235](https://jaycar.com.au/p/PH9235) | 9V battery module              |
 
-* Solid core cables such as [WH3032](https://jaycar.com.au/p/WH3032) are always handy to have close by, as some tasks are easier with solid core wire.
+- Solid core cables such as [WH3032](https://jaycar.com.au/p/WH3032) are always handy to have close by, as some tasks are easier with solid core wire.
 
 ## Connection table
 
-| Nano Pin | Connection |
-| :------------- | :------------- |
-| A0 | Analog Module A0       |
-| A4 | LCD SDA pin |
-| A5 | LCD SCL pin |
-| VIN | Toggle switch centre |
-| D4 | LED Strip #1 DIN |
+| Nano Pin | Connection           |
+| :------- | :------------------- |
+| A0       | Analog Module A0     |
+| A4       | LCD SDA pin          |
+| A5       | LCD SCL pin          |
+| VIN      | Toggle switch centre |
+| D4       | LED Strip #1 DIN     |
 
 Also connect all of the VCC and 5V connections. The battery holder will connect to one side of the toggle switch, which will allow you to turn on/off the unit by feeding 9V into the `VIN` pin of the Nano.
 
-![](images/schematic.png)
+![schematics](images/schematic.png)
 
 (note, image is just a representation of the modules to show how they connect.)
 
 Due to how limited each of the connections are, we're using absolutely every connection we can to connect with the socket-socket leads.
 Each of the LED strips will be connected end to end to each other, and will make a zig-zag pattern across the front of the case, as shown in the below diagram.
 
-![](images/pixels.png)
+![pixels](images/pixels.png)
 
 It is important to ensure that each of the `DOUT` and `DIN` matches up, the DATA-OUT of one module must feed into the DATA-IN of the next module, and the DATA-IN of the first module, attaches to the Nano
 
 ## Assembly
-
 
 One of the first steps is to modify the Nano so that the cables are a little more organised.
 
@@ -82,6 +91,7 @@ You can also solder wires onto the LED panels, making sure that you check for to
 When all is said and done, connect up how the schematic shows and connect it to the computer for programming.
 
 ## Source code
+
 The code in this project uses a library called "FHT" which has been included in with these sketch files. This file was originally created by [Open Music Labs](http://wiki.openmusiclabs.com/wiki/ArduinoFHT).
 
 Simply download, extract, and place in your `Documents/Arduino/libraries` folder.
@@ -110,6 +120,7 @@ for (int i = 0 ; i < FHT_N ; i++)
 	fht_input[i] = k; // fill out array
 }
 ```
+
 We take the data out of the analog digital converter for this particular moment in time, as you can see it is a very slim slice of time so we must do this quickly, and sample a short audio segment into the `fht_input` array. We use raw bit-banging to do this, by controlling the registers manually as they say in the [ATMEL DATASHEET](http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf)
 
 The library also recommends doing the following, so we'll do them as well:
@@ -145,7 +156,7 @@ Notice how, because the LED bar graph essentially zig-zags around the front pane
 
 There's a few different options that you can do in regards to making your own changes this unit. One of the first ideas is to have a multi-colored rainbow sliding through each of the rows of LEDs, another is to have the screen display an audio waveform or have some sort of circular pattern that seems to popular.
 
-With this unit being a simple Nano, there's nothing to programming it other than connecting it up to the Arduino IDE,  and pressing upload.
+With this unit being a simple Nano, there's nothing to programming it other than connecting it up to the Arduino IDE, and pressing upload.
 
 ## Use
 
